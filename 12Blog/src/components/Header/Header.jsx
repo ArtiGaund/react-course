@@ -2,10 +2,10 @@ import React from 'react';
 // using container
 import { Container, Logo, LogoutBtn } from '../index';
 // Links for redirections
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // selector to check in store whether user is login or not
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 function Header(){
