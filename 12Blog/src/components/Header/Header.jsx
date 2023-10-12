@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useId } from 'react';
 // using container
 import { Container, Logo, LogoutBtn } from '../index';
 // Links for redirections
@@ -23,6 +23,7 @@ UserCircleIcon,
 XMarkIcon,
 } from "@heroicons/react/24/outline"
 
+
 function Header(){
     // taking out from state whether its authenticated or not
     const authStatus = useSelector((state) => state.auth.status)
@@ -46,6 +47,7 @@ function Header(){
             slug: "/",
             active: true,
             icon: <HomeModernIcon className='h-[18px] w-[18px]'/>,
+            key: 1,
         },
         // {
         //     name: "Login",
@@ -62,12 +64,14 @@ function Header(){
             slug: "/all-posts",
             active: true    ,
             icon: <Square3Stack3DIcon className='h-[18px] w-[18px]'/>,
+            key: 2,
         },
         {
             name: "Add Post",
             slug: "/add-post",
             active: authStatus,
             icon: <PhotoIcon className='h-[18px] w-[18px]'/>,
+            key: 3,
         },
         // Todo: add the account or profile page
     ]
@@ -93,10 +97,10 @@ function Header(){
                        <div className='hidden lg:block'>
                             {/* <NavList /> */}
                             <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
-                                {navItems.map(({ name, slug, active, icon, index}) => (
+                                {navItems.map(({ name, slug, active, icon, key}) => (
                                     active ?
                                     <Typography
-                                    key={index}
+                                    key={key}
                                     as="a"
                                     href="#"
                                     variant='small'
@@ -104,7 +108,7 @@ function Header(){
                                     className='font-normal'
                                     onClick={()=> navigate(slug)}
                                     >
-                                        <ListItem className='flex items-center gap-2 py-2 pr-4'>
+                                        <ListItem className='flex items-center gap-2 py-2 pr-4' key={key}>
                                             {icon}
                                             {name}
                                         </ListItem>
@@ -140,10 +144,10 @@ function Header(){
                     </div>
                     <Collapse open={openNav}>
                         <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
-                            {navItems.map(({ name, slug, active, icon, index}) => (
+                            {navItems.map(({ name, slug, active, icon, key}) => (
                             active ?
                                 <Typography
-                                key={index}
+                                key={key}
                                 as="a"
                                 href="#"
                                 variant='small'
