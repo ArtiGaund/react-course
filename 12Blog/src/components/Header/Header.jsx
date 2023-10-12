@@ -62,7 +62,7 @@ function Header(){
         {
             name: "All Posts",
             slug: "/all-posts",
-            active: true    ,
+            active: true,
             icon: <Square3Stack3DIcon className='h-[18px] w-[18px]'/>,
             key: 2,
         },
