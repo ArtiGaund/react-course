@@ -6,7 +6,7 @@ import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import { Header, Footer } from './components'
 import { Outlet } from 'react-router-dom'
-import './App.css'
+//  import './App.css'
 
 function App() {
   // we need loading state when we fetch data from application so it will take some time for that network request
@@ -32,7 +32,7 @@ function App() {
   // finally will always run whether then works or not, setLoading is used in finally to show loading work is done
   // now conditional rendering is done in
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <div className='min-h-screen flex flex-wrap content-between'>
       <div className='w-full block'>
         <Header />
         <main>
