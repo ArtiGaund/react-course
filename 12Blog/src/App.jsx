@@ -6,6 +6,7 @@ import authService from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import { Header, Footer } from './components'
 import { Outlet } from 'react-router-dom'
+import bg1 from '../src/images/bg3.png'
 //  import './App.css'
 
 function App() {
@@ -31,11 +32,19 @@ function App() {
   },[]) 
   // finally will always run whether then works or not, setLoading is used in finally to show loading work is done
   // now conditional rendering is done in
+  const styles = {
+    backgroundImage:  `url(${bg1})`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'repeat',
+    backgroundPosition: 'relative',
+    height: '100vh',
+    overflow: 'auto',
+}
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between'>
+    <div className='flex flex-col content-between min-h-screen w-screen' style={styles}>
       <div className='w-full block'>
         <Header />
-        <main>
+        <main className='flex-grow min-h-[75vh] overflow-auto p-4'>
         {/* TODO:   */}
           <Outlet />
         </main>
