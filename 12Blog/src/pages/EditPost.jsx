@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function EditPost(){
     const [ post, setPost ] = useState(null)
-    //slug is needed, we need to take out values from url
+    //slug is needed, we need to take out values from
     const { slug } = useParams()
     const navigate = useNavigate()
 

@@ -2,12 +2,15 @@
 // for project id, etc
 import conf from '../conf/conf.js';
 
-import { Client, Account, ID } from "appwrite";
+import { Client, Account, ID} from "appwrite";
+import { useParams } from 'react-router-dom';
+
 
 export class AuthService {
     // creating properties
     client = new Client();
     account;
+
 
     constructor() {
         this.client
@@ -26,8 +29,7 @@ export class AuthService {
             const userAccount = await this.account.create( ID.unique(), email, password, name );
             if(userAccount)
             {
-                // call another method login
-                return this.login({ email, password });
+                    return this.login({ email, password });
             }
             else return userAccount;
         } catch(error){
@@ -37,7 +39,16 @@ export class AuthService {
 
     async login({ email, password }){
         try {
-            return await this.account.createEmailSession( email, password);
+            const session = await this.account.createEmailSession( email, password);
+            if(session){
+                const verify = this.emailVerification()
+                if(verify){
+                    return session;
+                }
+                else{
+                    console.log("Account not created ");
+                }
+            }
         } catch (error) {
             console.log("Appwrite service :: login :: error ",error);
         }
@@ -59,6 +70,15 @@ export class AuthService {
         } catch (error) {
             console.log("Appwrite service :: logout :: error ",error)
         }
+    }
+    async emailVerification() {
+        const url ='http://localhost:5173/all-posts/'
+        return await this.account.createVerification(url).then(( response) => {
+            console.log("Verify your acccount by clicking on the verification link in your email ",response);
+        })
+        .catch((error) => {
+            console.log("Verification failed ",error);
+        })
     }
 }
 
